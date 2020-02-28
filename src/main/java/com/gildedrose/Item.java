@@ -18,4 +18,12 @@ public class Item {
     public String toString() {
         return this.name + ", " + this.sell_in + ", " + this.quality;
     }
+
+    void plusOneQuality() {
+        quality = quality + 1;
+    }
+
+    void tallyDownQuality() {
+        quality = quality - 1;
+    }
 }
