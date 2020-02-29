@@ -33,10 +33,8 @@ public class Item {
     void update() {
         if (!name.equals(AGED_BRIE)
                 && !name.equals(TAFKL_80_ETC)) {
-            if (quality > 0) {
-                if (!name.equals(SULFURAS)) {
+            if (quality > 0 && !name.equals(SULFURAS)) {
                     tallyDownQuality();
-                }
             }
         } else {
             if (quality < 50) {
@@ -63,19 +61,19 @@ public class Item {
         }
 
         if (sell_in < 0) {
-            if (!name.equals(AGED_BRIE)) {
-                if (!name.equals(TAFKL_80_ETC)) {
+            if (name.equals(AGED_BRIE)) {
+                if (quality < 50) {
+                    plusOneQuality();
+                }
+            } else {
+                if (name.equals(TAFKL_80_ETC)) {
+                    quality = 0;
+                } else {
                     if (quality > 0) {
                         if (!name.equals(SULFURAS)) {
                             tallyDownQuality();
                         }
                     }
-                } else {
-                    quality = 0;
-                }
-            } else {
-                if (quality < 50) {
-                    plusOneQuality();
                 }
             }
         }
