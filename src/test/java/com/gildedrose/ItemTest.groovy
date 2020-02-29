@@ -9,95 +9,32 @@ class ItemTest extends Specification {
     def SULFURAS = "Sulfuras, Hand of Ragnaros";
     def OTHER = "other"
 
-    def "should return 49 when update quality given normal name with sell in =-1 and quality is 51"() {
-        given:
-        def item = Item.builder().sellIn(-1).quality(51).name(OTHER).build()
-        when:
+    def "test role for other name item"(int sellIn, int quality, int updatedSellIn, int updatedQuality) {
+        expect:
+        def item = Item.builder().sellIn(sellIn).quality(quality).name(OTHER).build()
         item.update()
-        then:
-        item.quality == 49
-        item.sellIn == -2
+        item.quality == updatedQuality
+        item.sellIn == updatedSellIn
+        where:
+        sellIn | quality || updatedSellIn | updatedQuality
+        -1     | 51      || -2            | 49
+        -1     | -1      || -2            | -1
+        1      | 51      || 0             | 50
+        1      | -1      || 0             | -1
     }
 
-    def "should return -1 when update quality given normal name with sell in = -1 and quality is -2"() {
-        given:
-        def item = Item.builder().sellIn(-1).quality(-1).name(OTHER).build()
-        when:
+    def "test role for AGED BRIE name item"(int sellIn, int quality, int updatedSellIn, int updatedQuality) {
+        expect:
+        def item = Item.builder().sellIn(sellIn).quality(quality).name(AGED_BRIE).build()
         item.update()
-        then:
-        item.quality == -1
-        item.sellIn == -2
-    }
-    def "should return 50 when update quality given normal name with sell in = 1 and quality is 51"() {
-        given:
-        def item = Item.builder().sellIn(1).quality(51).name(OTHER).build()
-        when:
-        item.update()
-        then:
-        item.quality == 50
-        item.sellIn == 0
-    }
-    def "should return -1 when update quality given normal name with sell in = 1 and quality is -1"() {
-        given:
-        def item = Item.builder().sellIn(1).quality(-1).name(OTHER).build()
-        when:
-        item.update()
-        then:
-        item.quality == -1
-        item.sellIn == 0
-    }
-    def "should return 50when update quality given normal name with sell in = -1 and quality is 48"() {
-        given:
-        def item = Item.builder().sellIn(-1).quality(48).name(AGED_BRIE).build()
-        when:
-        item.update()
-        then:
-        item.quality == 50
-        item.sellIn == -2
-    }
-    def "should return 50when update quality given normal name with sell in = -1 and quality is 49"() {
-        given:
-        def item = Item.builder().sellIn(-1).quality(49).name(AGED_BRIE).build()
-        when:
-        item.update()
-        then:
-        item.quality == 50
-        item.sellIn == -2
-    }
-    def "should return 51 when update quality given normal name with sell in = 1 and quality is 51"() {
-        given:
-        def item = Item.builder().sellIn(1).quality(51).name(AGED_BRIE).build()
-        when:
-        item.update()
-        then:
-        item.quality == 51
-        item.sellIn == 0
-    }
-    def "should return 51 when update quality given normal name with sell in = -1 and quality is 51"() {
-        given:
-        def item = Item.builder().sellIn(-1).quality(51).name(AGED_BRIE).build()
-        when:
-        item.update()
-        then:
-        item.quality == 51
-        item.sellIn == -2
-    }
-    def "should return 50 when update quality given normal name with sell in = 1 and quality is 50"() {
-        given:
-        def item = Item.builder().sellIn(1).quality(50).name(AGED_BRIE).build()
-        when:
-        item.update()
-        then:
-        item.quality == 50
-        item.sellIn ==0
-    }
-    def "should return -1 when update quality given normal name with sell in = 1 and quality is 0"() {
-        given:
-        def item = Item.builder().sellIn(1).quality(-1).name(AGED_BRIE).build()
-        when:
-        item.update()
-        then:
-        item.quality == 0
-        item.sellIn ==0
+        item.quality == updatedQuality
+        item.sellIn == updatedSellIn
+        where:
+        sellIn | quality || updatedSellIn | updatedQuality
+        -1     | 48      || -2            | 50
+        -1     | 49      || -2            | 50
+        -1     | 51      || -2            | 51
+        1      | 51      || 0             | 51
+        1      | -1      || 0             | 0
     }
 }
