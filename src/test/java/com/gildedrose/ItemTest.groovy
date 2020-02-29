@@ -46,4 +46,58 @@ class ItemTest extends Specification {
         item.quality == -1
         item.sellIn == 0
     }
+    def "should return 50when update quality given normal name with sell in = -1 and quality is 48"() {
+        given:
+        def item = Item.builder().sellIn(-1).quality(48).name(AGED_BRIE).build()
+        when:
+        item.update()
+        then:
+        item.quality == 50
+        item.sellIn == -2
+    }
+    def "should return 50when update quality given normal name with sell in = -1 and quality is 49"() {
+        given:
+        def item = Item.builder().sellIn(-1).quality(49).name(AGED_BRIE).build()
+        when:
+        item.update()
+        then:
+        item.quality == 50
+        item.sellIn == -2
+    }
+    def "should return 51 when update quality given normal name with sell in = 1 and quality is 51"() {
+        given:
+        def item = Item.builder().sellIn(1).quality(51).name(AGED_BRIE).build()
+        when:
+        item.update()
+        then:
+        item.quality == 51
+        item.sellIn == 0
+    }
+    def "should return 51 when update quality given normal name with sell in = -1 and quality is 51"() {
+        given:
+        def item = Item.builder().sellIn(-1).quality(51).name(AGED_BRIE).build()
+        when:
+        item.update()
+        then:
+        item.quality == 51
+        item.sellIn == -2
+    }
+    def "should return 50 when update quality given normal name with sell in = 1 and quality is 50"() {
+        given:
+        def item = Item.builder().sellIn(1).quality(50).name(AGED_BRIE).build()
+        when:
+        item.update()
+        then:
+        item.quality == 50
+        item.sellIn ==0
+    }
+    def "should return -1 when update quality given normal name with sell in = 1 and quality is 0"() {
+        given:
+        def item = Item.builder().sellIn(1).quality(-1).name(AGED_BRIE).build()
+        when:
+        item.update()
+        then:
+        item.quality == 0
+        item.sellIn ==0
+    }
 }
