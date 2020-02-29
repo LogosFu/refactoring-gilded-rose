@@ -1,20 +1,16 @@
 package com.gildedrose;
 
-import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @Getter
 public class Item {
 
   public static final String AGED_BRIE = "Aged Brie";
   public static final String TAFKL_80_ETC = "Backstage passes to a TAFKAL80ETC concert";
   public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
-  private String name;
-
-  private int sellIn;
-
-  private int quality;
+  protected String name;
+  protected int sellIn;
+  protected int quality;
 
   public Item(String name, int sellIn, int quality) {
     this.name = name;
@@ -27,11 +23,11 @@ public class Item {
     return this.name + ", " + this.sellIn + ", " + this.quality;
   }
 
-  void plusOneQuality() {
+  public void plusOneQuality() {
     quality = quality + 1;
   }
 
-  void tallyDownQuality() {
+  protected void tallyDownQuality() {
     quality = quality - 1;
   }
 
@@ -42,35 +38,47 @@ public class Item {
     sellIn = sellIn - 1;
     switch (name) {
       case AGED_BRIE:
-        if (quality < 50) {
-          plusOneQuality();
-        }
-        if (sellIn < 0 && quality < 50) {
-          plusOneQuality();
-        }
+        roleForAgedBrie();
         break;
       case TAFKL_80_ETC:
-        if (quality < 50) {
-          plusOneQuality();
-          if (sellIn < 11 && quality < 50) {
-            plusOneQuality();
-          }
-          if (sellIn < 6 && quality < 50) {
-            plusOneQuality();
-          }
-        }
-        if (sellIn < 0) {
-          quality = 0;
-        }
+        roleForTAFKL();
         break;
       default:
-        if (quality > 0) {
-          tallyDownQuality();
-        }
-        if (sellIn < 0 && quality > 0) {
-          tallyDownQuality();
-        }
+        roleForDefault();
         break;
+    }
+  }
+
+  private void roleForDefault() {
+    if (quality > 0) {
+      tallyDownQuality();
+    }
+    if (sellIn < 0 && quality > 0) {
+      tallyDownQuality();
+    }
+  }
+
+  private void roleForAgedBrie() {
+    if (quality < 50) {
+      plusOneQuality();
+    }
+    if (sellIn < 0 && quality < 50) {
+      plusOneQuality();
+    }
+  }
+
+  private void roleForTAFKL() {
+    if (quality < 50) {
+      plusOneQuality();
+      if (sellIn < 11 && quality < 50) {
+        plusOneQuality();
+      }
+      if (sellIn < 6 && quality < 50) {
+        plusOneQuality();
+      }
+    }
+    if (sellIn < 0) {
+      quality = 0;
     }
   }
 }

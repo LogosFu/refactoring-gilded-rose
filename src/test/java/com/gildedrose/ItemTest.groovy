@@ -1,5 +1,9 @@
 package com.gildedrose
 
+import com.gildedrose.item.AgedBrie
+import com.gildedrose.item.Backstage
+import com.gildedrose.item.NormalItem
+import com.gildedrose.item.Sulfuras
 import spock.lang.Specification
 
 class ItemTest extends Specification {
@@ -11,7 +15,7 @@ class ItemTest extends Specification {
 
     def "test role for other name item"(int sellIn, int quality, int updatedSellIn, int updatedQuality) {
         expect:
-        def item = Item.builder().sellIn(sellIn).quality(quality).name(OTHER).build()
+        def item = NormalItem.builder().sellIn(sellIn).quality(quality).name(OTHER).build()
         item.update()
         item.quality == updatedQuality
         item.sellIn == updatedSellIn
@@ -25,7 +29,7 @@ class ItemTest extends Specification {
 
     def "test role for AGED BRIE name item"(int sellIn, int quality, int updatedSellIn, int updatedQuality) {
         expect:
-        def item = Item.builder().sellIn(sellIn).quality(quality).name(AGED_BRIE).build()
+        def item = AgedBrie.builder().sellIn(sellIn).quality(quality).name(AGED_BRIE).build()
         item.update()
         item.quality == updatedQuality
         item.sellIn == updatedSellIn
@@ -40,7 +44,7 @@ class ItemTest extends Specification {
 
     def "test role for TAFKL_80_ETC name item"(int sellIn, int quality, int updatedSellIn, int updatedQuality) {
         expect:
-        def item = Item.builder().sellIn(sellIn).quality(quality).name(TAFKL_80_ETC).build()
+        def item = Backstage.builder().sellIn(sellIn).quality(quality).name(TAFKL_80_ETC).build()
         item.update()
         item.quality == updatedQuality
         item.sellIn == updatedSellIn
@@ -61,7 +65,7 @@ class ItemTest extends Specification {
 
     def "test role for SULFURAS item"(int sellIn, int quality, int updatedSellIn, int updatedQuality) {
         expect:
-        def item = Item.builder().sellIn(sellIn).quality(quality).name(SULFURAS).build()
+        def item = Sulfuras.builder().sellIn(sellIn).quality(quality).name(SULFURAS).build()
         item.update()
         item.quality == updatedQuality
         item.sellIn == updatedSellIn
