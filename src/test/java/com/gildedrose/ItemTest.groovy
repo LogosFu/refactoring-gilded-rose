@@ -57,6 +57,20 @@ class ItemTest extends Specification {
         7      | -2      || 6             | 0
         12     | 49      || 11            | 50
         12     | -1      || 11            | 0
+    }
 
+    def "test role for SULFURAS item"(int sellIn, int quality, int updatedSellIn, int updatedQuality) {
+        expect:
+        def item = Item.builder().sellIn(sellIn).quality(quality).name(SULFURAS).build()
+        item.update()
+        item.quality == updatedQuality
+        item.sellIn == updatedSellIn
+        where:
+        sellIn | quality || updatedSellIn | updatedQuality
+        -1     | 51      || -1            | 51
+        -1     | -1      || -1            | -1
+        1      | 51      || 1             | 51
+        1      | -1      || 1             | -1
+        1      | 49      || 1             | 49
     }
 }
