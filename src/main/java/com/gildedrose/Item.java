@@ -1,5 +1,10 @@
 package com.gildedrose;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Builder
+@Getter
 public class Item {
 
   public static final String AGED_BRIE = "Aged Brie";
