@@ -36,12 +36,13 @@ public class Item {
   }
 
   void update() {
-    if (!name.equals(SULFURAS)) {
-      sellIn = sellIn - 1;
+    if (name.equals(SULFURAS)) {
+      return;
     }
+    sellIn = sellIn - 1;
     if (!name.equals(AGED_BRIE)
         && !name.equals(TAFKL_80_ETC)) {
-      if (quality > 0 && !name.equals(SULFURAS)) {
+      if (quality > 0) {
         tallyDownQuality();
       }
     } else {
@@ -69,7 +70,7 @@ public class Item {
         if (name.equals(TAFKL_80_ETC)) {
           quality = 0;
         } else {
-          if (quality > 0 && !name.equals(SULFURAS)) {
+          if (quality > 0) {
             tallyDownQuality();
           }
         }
