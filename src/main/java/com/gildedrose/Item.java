@@ -40,41 +40,37 @@ public class Item {
       return;
     }
     sellIn = sellIn - 1;
-    if (!name.equals(AGED_BRIE)
-        && !name.equals(TAFKL_80_ETC)) {
-      if (quality > 0) {
-        tallyDownQuality();
-      }
-    } else {
-      if (quality < 50) {
-        plusOneQuality();
-
-        if (name.equals(TAFKL_80_ETC)) {
+    switch (name) {
+      case AGED_BRIE:
+        if (quality < 50) {
+          plusOneQuality();
+        }
+        if (sellIn < 0 && quality < 50) {
+          plusOneQuality();
+        }
+        break;
+      case TAFKL_80_ETC:
+        if (quality < 50) {
+          plusOneQuality();
           if (sellIn < 11 && quality < 50) {
             plusOneQuality();
           }
-
           if (sellIn < 6 && quality < 50) {
             plusOneQuality();
           }
         }
-      }
-    }
-
-    if (sellIn < 0) {
-      if (name.equals(AGED_BRIE)) {
-        if (quality < 50) {
-          plusOneQuality();
-        }
-      } else {
-        if (name.equals(TAFKL_80_ETC)) {
+        if (sellIn < 0) {
           quality = 0;
-        } else {
-          if (quality > 0) {
-            tallyDownQuality();
-          }
         }
-      }
+        break;
+      default:
+        if (quality > 0) {
+          tallyDownQuality();
+        }
+        if (sellIn < 0 && quality > 0) {
+          tallyDownQuality();
+        }
+        break;
     }
   }
 }
