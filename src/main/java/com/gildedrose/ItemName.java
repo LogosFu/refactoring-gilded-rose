@@ -2,7 +2,7 @@ package com.gildedrose;
 
 public enum ItemName {
   AGED_BRIE("Aged Brie"),
-  TAFKL_80_ETC("Backstage passes to a TAFKAL80ETC concert"),
+  BACKSTAGE("Backstage passes to a TAFKAL80ETC concert"),
   SULFURAS("Sulfuras, Hand of Ragnaros"),
   DEFAULT("default");
 
@@ -17,7 +17,7 @@ public enum ItemName {
       case "Aged Brie":
         return AGED_BRIE;
       case "Backstage passes to a TAFKAL80ETC concert":
-        return TAFKL_80_ETC;
+        return BACKSTAGE;
       case "Sulfuras, Hand of Ragnaros":
         return SULFURAS;
       default:
