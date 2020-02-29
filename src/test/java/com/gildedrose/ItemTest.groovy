@@ -37,4 +37,26 @@ class ItemTest extends Specification {
         1      | 51      || 0             | 51
         1      | -1      || 0             | 0
     }
+
+    def "test role for TAFKL_80_ETC name item"(int sellIn, int quality, int updatedSellIn, int updatedQuality) {
+        expect:
+        def item = Item.builder().sellIn(sellIn).quality(quality).name(TAFKL_80_ETC).build()
+        item.update()
+        item.quality == updatedQuality
+        item.sellIn == updatedSellIn
+        where:
+        sellIn | quality || updatedSellIn | updatedQuality
+        -1     | 48      || -2            | 0
+        -1     | 49      || -2            | 0
+        -1     | 51      || -2            | 0
+        1      | 51      || 0             | 51
+        1      | 49      || 0             | 50
+        1      | 47      || 0             | 50
+        1      | -3      || 0             | 0
+        7      | 48      || 6             | 50
+        7      | -2      || 6             | 0
+        12     | 49      || 11            | 50
+        12     | -1      || 11            | 0
+
+    }
 }
