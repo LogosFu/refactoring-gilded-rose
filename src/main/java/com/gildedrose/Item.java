@@ -26,4 +26,55 @@ public class Item {
     void tallyDownQuality() {
         quality = quality - 1;
     }
+
+    void update() {
+        if (!name.equals(GildedRose.AGED_BRIE)
+                && !name.equals(GildedRose.TAFKL_80_ETC)) {
+            if (quality > 0) {
+                if (!name.equals(GildedRose.SULFURAS)) {
+                    tallyDownQuality();
+                }
+            }
+        } else {
+            if (quality < 50) {
+                plusOneQuality();
+
+                if (name.equals(GildedRose.TAFKL_80_ETC)) {
+                    if (sell_in < 11) {
+                        if (quality < 50) {
+                            plusOneQuality();
+                        }
+                    }
+
+                    if (sell_in < 6) {
+                        if (quality < 50) {
+                            plusOneQuality();
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!name.equals(GildedRose.SULFURAS)) {
+            sell_in = sell_in - 1;
+        }
+
+        if (sell_in < 0) {
+            if (!name.equals(GildedRose.AGED_BRIE)) {
+                if (!name.equals(GildedRose.TAFKL_80_ETC)) {
+                    if (quality > 0) {
+                        if (!name.equals(GildedRose.SULFURAS)) {
+                            tallyDownQuality();
+                        }
+                    }
+                } else {
+                    quality = 0;
+                }
+            } else {
+                if (quality < 50) {
+                    plusOneQuality();
+                }
+            }
+        }
+    }
 }
