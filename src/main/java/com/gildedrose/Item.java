@@ -2,6 +2,9 @@ package com.gildedrose;
 
 public class Item {
 
+    public static final String AGED_BRIE = "Aged Brie";
+    public static final String TAFKL_80_ETC = "Backstage passes to a TAFKAL80ETC concert";
+    public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     public String name;
 
     public int sell_in;
@@ -28,10 +31,10 @@ public class Item {
     }
 
     void update() {
-        if (!name.equals(GildedRose.AGED_BRIE)
-                && !name.equals(GildedRose.TAFKL_80_ETC)) {
+        if (!name.equals(AGED_BRIE)
+                && !name.equals(TAFKL_80_ETC)) {
             if (quality > 0) {
-                if (!name.equals(GildedRose.SULFURAS)) {
+                if (!name.equals(SULFURAS)) {
                     tallyDownQuality();
                 }
             }
@@ -39,7 +42,7 @@ public class Item {
             if (quality < 50) {
                 plusOneQuality();
 
-                if (name.equals(GildedRose.TAFKL_80_ETC)) {
+                if (name.equals(TAFKL_80_ETC)) {
                     if (sell_in < 11) {
                         if (quality < 50) {
                             plusOneQuality();
@@ -55,15 +58,15 @@ public class Item {
             }
         }
 
-        if (!name.equals(GildedRose.SULFURAS)) {
+        if (!name.equals(SULFURAS)) {
             sell_in = sell_in - 1;
         }
 
         if (sell_in < 0) {
-            if (!name.equals(GildedRose.AGED_BRIE)) {
-                if (!name.equals(GildedRose.TAFKL_80_ETC)) {
+            if (!name.equals(AGED_BRIE)) {
+                if (!name.equals(TAFKL_80_ETC)) {
                     if (quality > 0) {
-                        if (!name.equals(GildedRose.SULFURAS)) {
+                        if (!name.equals(SULFURAS)) {
                             tallyDownQuality();
                         }
                     }
