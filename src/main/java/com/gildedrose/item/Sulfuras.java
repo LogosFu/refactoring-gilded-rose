@@ -13,6 +13,5 @@ public class Sulfuras extends Item {
   }
 
   public void update() {
-    return;
   }
 }
