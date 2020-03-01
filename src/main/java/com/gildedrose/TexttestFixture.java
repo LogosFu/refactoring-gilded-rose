@@ -9,13 +9,16 @@ public class TexttestFixture {
     public static void main(String[] args) {
         GildedRose app = buildApp();
         int days = getDays(args);
-        final String dailyReports = IntStream.range(0, days).mapToObj(i -> {
-            final String dailyReport = getDailyReport(app, i);
-            app.updateQuality();
-            return dailyReport;
-        }).collect(Collectors.joining());
+        final String dailyReports = IntStream.range(0, days)
+            .mapToObj(i -> getReportAndUpdateQuality(app, i)).collect(Collectors.joining());
         final String report = String.format("OMGHAI!%n%s", dailyReports);
         System.out.printf(report);
+    }
+
+    private static String getReportAndUpdateQuality(GildedRose app, int i) {
+        final String dailyReport = getDailyReport(app, i);
+        app.updateQuality();
+        return dailyReport;
     }
 
     private static String getDailyReport(GildedRose app, int index) {
