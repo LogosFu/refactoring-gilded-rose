@@ -9,13 +9,16 @@ public class TexttestFixture {
     public static void main(String[] args) {
         GildedRose app = buildApp();
         int days = getDays(args);
-        final String dailyReports = IntStream.range(0, days).mapToObj(i -> {
-            final String dailyReport = getDailyReport(app, i);
-            app.updateQuality();
-            return dailyReport;
-        }).collect(Collectors.joining());
+        final String dailyReports = IntStream.range(0, days)
+            .mapToObj(i -> getReportAndUpdateQuality(app, i)).collect(Collectors.joining());
         final String report = String.format("OMGHAI!%n%s", dailyReports);
         System.out.printf(report);
+    }
+
+    private static String getReportAndUpdateQuality(GildedRose app, int i) {
+        final String dailyReport = getDailyReport(app, i);
+        app.updateQuality();
+        return dailyReport;
     }
 
     private static String getDailyReport(GildedRose app, int index) {
@@ -25,7 +28,6 @@ public class TexttestFixture {
             .format("-------- day %d --------%nname, sellIn, quality%n%s%n%n", index, itemInfo);
     }
 
-
     private static int getDays(String[] args) {
         int days = 3;
         if (args.length > 0) {
@@ -33,7 +35,6 @@ public class TexttestFixture {
         }
         return days;
     }
-
     private static GildedRose buildApp() {
         ItemDTO[] items = new ItemDTO[]{
             new ItemDTO("+5 Dexterity Vest", 10, 20), //
