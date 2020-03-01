@@ -1,26 +1,28 @@
 package com.gildedrose;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TexttestFixture {
 
     public static void main(String[] args) {
         GildedRose app = buildApp();
-        System.out.println("OMGHAI!");
-
         int days = getDays(args);
-
-        for (int i = 0; i < days; i++) {
-            getDailyReport(app, i);
+        final String dailyReports = IntStream.range(0, days).mapToObj(i -> {
+            final String dailyReport = getDailyReport(app, i);
             app.updateQuality();
-        }
+            return dailyReport;
+        }).collect(Collectors.joining());
+        final String report = String.format("OMGHAI!%n%s", dailyReports);
+        System.out.printf(report);
     }
 
-    private static void getDailyReport(GildedRose app, int index) {
-        System.out.println("-------- day " + index + " --------");
-        System.out.println("name, sellIn, quality");
-        Arrays.stream(app.items).forEach(System.out::println);
-        System.out.println();
+    private static String getDailyReport(GildedRose app, int index) {
+        String itemInfo = Arrays.stream(app.items).map(Item::toString)
+            .collect(Collectors.joining("\n"));
+        return String
+            .format("-------- day %d --------%nname, sellIn, quality%n%s%n%n", index, itemInfo);
     }
 
 
