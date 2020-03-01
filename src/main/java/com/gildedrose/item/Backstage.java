@@ -13,18 +13,19 @@ public class Backstage extends Item {
   }
 
   public void update() {
-    sellIn = sellIn - 1;
-    if (quality < 50) {
+    tallyDownSellIn();
+    if (qualityMoreThanMax()) {
       plusOneQuality();
-      if (sellIn < 11 && quality < 50) {
+      if (sellIn < 11 && qualityMoreThanMax()) {
         plusOneQuality();
       }
-      if (sellIn < 6 && quality < 50) {
+      if (sellIn < 6 && qualityMoreThanMax()) {
         plusOneQuality();
       }
     }
-    if (sellIn < 0) {
+    if (sellInUnderZero()) {
       quality = 0;
     }
   }
+
 }

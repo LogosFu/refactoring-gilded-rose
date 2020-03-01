@@ -29,4 +29,20 @@ public abstract class Item {
   }
 
   public abstract void update();
+
+  protected boolean qualityMoreThanMax() {
+    return quality < 50;
+  }
+
+  protected boolean sellInUnderZero() {
+    return sellIn < 0;
+  }
+
+  protected boolean qualityMoreThanZero() {
+    return quality > 0;
+  }
+
+  protected void tallyDownSellIn() {
+    sellIn = sellIn - 1;
+  }
 }

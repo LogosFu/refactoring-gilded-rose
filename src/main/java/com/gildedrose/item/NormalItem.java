@@ -12,11 +12,11 @@ public class NormalItem extends Item {
     super(name, sellIn, quality);
   }
   public void update(){
-    sellIn = sellIn - 1;
-    if (quality > 0) {
+    tallyDownSellIn();
+    if (qualityMoreThanZero()) {
       tallyDownQuality();
     }
-    if (sellIn < 0 && quality > 0) {
+    if (sellInUnderZero() && qualityMoreThanZero()) {
       tallyDownQuality();
     }
   }
