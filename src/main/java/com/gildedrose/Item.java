@@ -20,6 +20,44 @@ public class Item {
     }
 
     void updateItemQuality() {
+        updateQuality();
+
+        updateSellIn();
+
+        if (isOverDue()) {
+            updateQualityWhenOverDue();
+        }
+    }
+
+    private void updateQualityWhenOverDue() {
+        if (!isAgedBrie()) {
+            if (!isBackstage()) {
+                if (quality > 0) {
+                    if (!isSulfuras()) {
+                        quality = quality - 1;
+                    }
+                }
+            } else {
+                quality = 0;
+            }
+        } else {
+            if (quality < 50) {
+                quality = quality + 1;
+            }
+        }
+    }
+
+    private boolean isOverDue() {
+        return sell_in < 0;
+    }
+
+    private void updateSellIn() {
+        if (!isSulfuras()) {
+            sell_in = sell_in - 1;
+        }
+    }
+
+    private void updateQuality() {
         if (!isAgedBrie()
             && !isBackstage()) {
             if (quality > 0) {
@@ -46,31 +84,9 @@ public class Item {
                 }
             }
         }
-
-        if (!isSulfuras()) {
-            sell_in = sell_in - 1;
-        }
-
-        if (sell_in < 0) {
-            if (!isAgedBrie()) {
-                if (!isBackstage()) {
-                    if (quality > 0) {
-                        if (!isSulfuras()) {
-                            quality = quality - 1;
-                        }
-                    }
-                } else {
-                    quality = 0;
-                }
-            } else {
-                if (quality < 50) {
-                    quality = quality + 1;
-                }
-            }
-        }
     }
 
-    private boolean isSulfuras() {
+    protected boolean isSulfuras() {
         return name.equals("Sulfuras, Hand of Ragnaros");
     }
 
