@@ -84,11 +84,11 @@ public class Item {
         return name.equals("Sulfuras, Hand of Ragnaros");
     }
 
-    private boolean isBackstage() {
-        return name.equals("Backstage passes to a TAFKAL80ETC concert");
-    }
+     protected boolean isBackstage() {
+         return name.equals("Backstage passes to a TAFKAL80ETC concert");
+     }
 
-    private boolean isAgedBrie() {
+    protected boolean isAgedBrie() {
         return name.equals("Aged Brie");
     }
 }
