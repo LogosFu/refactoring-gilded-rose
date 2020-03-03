@@ -2,7 +2,7 @@ package com.gildedrose;
 
 public class BackstagePasses extends Item {
 
-  public BackstagePasses(String name, int sell_in, int quality) {
+  public BackstagePasses(int sell_in, int quality) {
     super("Backstage passes to a TAFKAL80ETC concert", sell_in, quality);
   }
 
