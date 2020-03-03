@@ -30,65 +30,23 @@ public class Item {
     }
 
     protected void updateQualityWhenOverDue() {
-        if (isAgedBrie()) {
-            if (quality < 50) {
-                quality = quality + 1;
-            }
-        } else {
-            if (isBackstage()) {
-                quality = 0;
-            } else {
-                if (quality > 0) {
-                    quality = quality - 1;
-                }
-            }
+        if (quality > 0) {
+            quality = quality - 1;
         }
     }
 
-     protected boolean isOverDue() {
+    private boolean isOverDue() {
         return sell_in < 0;
     }
 
-     protected void updateSellIn() {
+    protected void updateSellIn() {
         sell_in = sell_in - 1;
     }
 
      protected void updateQuality() {
-        if (isAgedBrie()
-            || isBackstage()) {
-            if (quality < 50) {
-                quality = quality + 1;
-
-                if (isBackstage()) {
-                    if (sell_in < 11) {
-                        if (quality < 50) {
-                            quality = quality + 1;
-                        }
-                    }
-
-                    if (sell_in < 6) {
-                        if (quality < 50) {
-                            quality = quality + 1;
-                        }
-                    }
-                }
-            }
-        } else {
-            if (quality > 0) {
-                quality = quality - 1;
-            }
-        }
-    }
-
-    protected boolean isSulfuras() {
-        return name.equals("Sulfuras, Hand of Ragnaros");
-    }
-
-     protected boolean isBackstage() {
-         return name.equals("Backstage passes to a TAFKAL80ETC concert");
+         if (quality > 0) {
+             quality = quality - 1;
+         }
      }
 
-    protected boolean isAgedBrie() {
-        return name.equals("Aged Brie");
-    }
 }

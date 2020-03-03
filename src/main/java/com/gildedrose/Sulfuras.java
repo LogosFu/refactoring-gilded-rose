@@ -19,9 +19,4 @@ public class Sulfuras extends Item {
   @Override
   protected void updateQualityWhenOverDue() {
   }
-
-  @Override
-  protected boolean isSulfuras() {
-    return true;
-  }
 }

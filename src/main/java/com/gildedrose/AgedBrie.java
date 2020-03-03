@@ -7,20 +7,10 @@ public class AgedBrie extends Item {
   }
 
   @Override
-  protected boolean isAgedBrie() {
-    return true;
-  }
-
-  @Override
   protected void updateQualityWhenOverDue() {
     if (quality < 50) {
       quality = quality + 1;
     }
-  }
-
-  @Override
-  protected void updateSellIn() {
-    super.updateSellIn();
   }
 
   @Override
